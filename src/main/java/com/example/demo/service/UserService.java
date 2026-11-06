@@ -4,6 +4,9 @@ import java.util.List;
 
 import com.example.demo.model.User;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 public interface UserService {
 
     void addUser(User user);
@@ -16,5 +19,7 @@ public interface UserService {
 
     void removeUser(Integer id);
 
-    boolean login(String username, String password);
+    List<User> searchUsersByUsername(String keyword);
+    
+    Page<User> getUsers(Pageable pageable);
 }

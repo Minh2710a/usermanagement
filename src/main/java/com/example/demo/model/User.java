@@ -1,6 +1,9 @@
 package com.example.demo.model;
-
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "users")
@@ -10,20 +13,26 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(name = "keycloak_id", unique = true)
+    private String keycloakId;
+
+    @NotBlank(message = "Username is required")
     @Column(nullable = false, unique = true)
     private String username;
 
+    @NotBlank(message = "Fullname is required")
     @Column(nullable = false)
     private String fullname;
 
+    @NotBlank(message = "Email is required")
+    @Email(message = "Invaild email format")
     @Column(nullable = false, unique = true)
     private String email;
 
+    @NotNull
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Status status;
-
-    private String password;
 
     public User() {
 
@@ -72,11 +81,11 @@ public class User {
         return status;
     }
 
-    public String getPassword() {
-        return password;
+    public String getKeycloakId() {
+    return keycloakId;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setKeycloakId(String keycloakId) {
+        this.keycloakId = keycloakId;
     }
 }
