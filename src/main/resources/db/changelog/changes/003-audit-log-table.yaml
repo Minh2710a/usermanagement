@@ -1,0 +1,51 @@
+databaseChangeLog:
+  - changeSet:
+      id: 003-audit-log-table
+      author: Minh
+      changes:
+        - createTable:
+            tableName: audit_logs
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+
+              - column:
+                  name: actor_keycloak_id
+                  type: VARCHAR(255)
+
+              - column:
+                  name: actor_username
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: action
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: target_type
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: target_id
+                  type: VARCHAR(64)
+
+              - column:
+                  name: target_username
+                  type: VARCHAR(255)
+
+              - column:
+                  name: created_at
+                  type: DATETIME(6)
+                  constraints:
+                    nullable: false
